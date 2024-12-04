@@ -11,6 +11,7 @@ class WordMap extends Grid {
 
             return this.getHasWordInDirection(word.substring(1), row + direction[0], col + direction[1], direction);
         }
+
         return false;
     }
 }
@@ -66,7 +67,6 @@ for (let r = 0; r <= wordMap.maxGridRow; r++) {
     }
 }
 
-// Avoid double-using hits
 const allHashes = Object.keys(foundMas);
 
 for (const [thisHash, hashes] of Object.entries(foundMas)) {
