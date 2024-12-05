@@ -1,7 +1,6 @@
 import {getAllLines} from "../lib/utils.js";
 const startTime = performance.now()
 
-const isLess = {};
 const isMore = {};
 const manuals = [];
 
@@ -16,12 +15,7 @@ for (const line of getAllLines('input.txt')) {
         const parts = line.split('|');
         const less = parseInt(parts[0]);
         const more = parseInt(parts[1]);
-
-        if (!isLess[less]) {
-            isLess[less] = [];
-        }
-        isLess[less].push(more);
-
+        
         if (!isMore[more]) {
             isMore[more] = [];
         }
