@@ -50,14 +50,13 @@ let p2 = 0;
 
 for (const manual of manuals) {
     const sorted = quickSort(manual.split(',').map((el) => parseInt(el)));
-    
+    const start = Math.floor(sorted.length / 2);
+    const middle = parseInt(sorted.slice(start, start + 1));
+
     if (sorted.join(',') === manual) {
-        const parts = manual.split(',');
-        const start = Math.floor(parts.length / 2);
-        p1 += parseInt(parts.slice(start, start + 1));
+        p1 += middle;
     } else {
-        const start = Math.floor(sorted.length / 2);
-        p2 += parseInt(sorted.slice(start, start + 1));
+        p2 += middle;
     }
 }
 
