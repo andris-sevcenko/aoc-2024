@@ -15,7 +15,7 @@ for (const line of getAllLines('input.txt')) {
         const parts = line.split('|');
         const less = parseInt(parts[0]);
         const more = parseInt(parts[1]);
-        
+
         if (!isMore[more]) {
             isMore[more] = [];
         }
@@ -49,14 +49,15 @@ let p1 = 0;
 let p2 = 0;
 
 for (const manual of manuals) {
-    if (quickSort(manual.split(',').map((el) => parseInt(el))).join(',') === manual) {
+    const sorted = quickSort(manual.split(',').map((el) => parseInt(el)));
+    
+    if (sorted.join(',') === manual) {
         const parts = manual.split(',');
         const start = Math.floor(parts.length / 2);
         p1 += parseInt(parts.slice(start, start + 1));
     } else {
-        const parts = quickSort(manual.split(',').map((el) => parseInt(el)))
-        const start = Math.floor(parts.length / 2);
-        p2 += parseInt(parts.slice(start, start + 1));
+        const start = Math.floor(sorted.length / 2);
+        p2 += parseInt(sorted.slice(start, start + 1));
     }
 }
 
