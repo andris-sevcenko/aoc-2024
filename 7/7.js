@@ -43,11 +43,11 @@ processFile('input.txt', (line) => {
     const initial = nums.shift();
 
     for (let operationString = 0; operationString <= to; operationString++) {
-        const operationStringInBinary = operationString.toString(3).padStart(nums.length, '0');
+        const operationStringInBase3 = operationString.toString(3).padStart(nums.length, '0');
         const thisOperation =  nums.reduce((prev, cur, idx) => {
-            if (!operationStringInBinary[idx] || operationStringInBinary[idx] === '0') {
+            if (!operationStringInBase3[idx] || operationStringInBase3[idx] === '0') {
                 return prev + cur;
-            } else if (operationStringInBinary[idx] === '1') {
+            } else if (operationStringInBase3[idx] === '1') {
                 return prev * cur;
             } else {
                 return parseInt(prev.toString().concat(cur.toString()))
