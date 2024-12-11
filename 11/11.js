@@ -33,12 +33,12 @@ const countStones = (map) => {
 
 let line = getFirstLine('input.txt').split(' ').map((val) => parseInt(val))
 
-const stoneRules = {};
+const stoneRules = new Map();
 let thisBlink = new Map();
 
 // Set up rules and stone collection
 for (const stone of line) {
-    stoneRules[stone] = transformStone(stone);
+    stoneRules.set(stone, transformStone(stone));
     thisBlink.set(stone, 1);
 }
 
@@ -47,12 +47,12 @@ for (let blink = 1; blink <= 75; blink++) {
     let nextBlink = new Map();
     thisBlink.forEach((count, stone) => {
         // Add new rule, if we don't have that
-        if (!stoneRules[stone]) {
-            stoneRules[stone] = transformStone(stone);
+        if (!stoneRules.has(stone)) {
+            stoneRules.set(stone, transformStone(stone));
         }
 
         // Update total stone counts for the blink of this kind of stone
-        for (const newStone of stoneRules[stone]) {
+        for (const newStone of stoneRules.get(stone)) {
             if (nextBlink.has(newStone)) {
                 nextBlink.set(newStone, nextBlink.get(newStone) + count);
             } else {
