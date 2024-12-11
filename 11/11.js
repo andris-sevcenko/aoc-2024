@@ -51,6 +51,7 @@ for (let blink = 1; blink <= 75; blink++) {
             stoneRules[stone] = transformStone(stone);
         }
 
+        // Update total stone counts for the blink of this kind of stone
         for (const newStone of stoneRules[stone]) {
             if (nextBlink.has(newStone)) {
                 nextBlink.set(newStone, nextBlink.get(newStone) + count);
