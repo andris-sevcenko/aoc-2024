@@ -9,7 +9,7 @@ const transformStone = (value) => {
     }
 
     const valAsString = value.toString();
-    if (valAsString.length % 2 === 0 ) {
+    if (valAsString.length % 2 === 0) {
         const leftVal = valAsString.substring(0, valAsString.length / 2);
         const rightVal = valAsString.substring(valAsString.length / 2);
 
@@ -57,7 +57,6 @@ for (let blink = 1; blink <= 75; blink++) {
             } else {
                 nextBlink.set(newStone, count);
             }
-
         }
     });
 
