@@ -8,6 +8,7 @@ grid.setGrid(getAllLines('input.txt'));
 const regions = [];
 const mapped = new Set();
 
+// Explore the grid and return an array of cells belonging to this region
 const mapRegion = (row, col, grid, mapped) => {
     const marker = grid.getCell(row, col);
     const region = [];
@@ -37,6 +38,7 @@ const mapRegion = (row, col, grid, mapped) => {
 }
 
 
+// For a given side piece, return other possible pieces of fence
 const getPossibleFencePieces = (fence) => {
     switch (fence.side) {
         case 'N':
@@ -90,19 +92,22 @@ for (const [key, region] of Object.entries(regions)) {
     for (const regionCell of region) {
         const row = regionCell[0];
         const col = regionCell[1];
+
         area++;
 
         const neighbours = grid.getAdjacent(row, col);
-        // Outer fences
+        // Fences on the outside of the grid
         fences += (4 - neighbours.length);
 
+        // Keep track of individual fence pieces, too
         let cellFences = new Set(['N', 'S', 'W', 'E']);
 
         for (const adjacent of neighbours) {
             if (adjacent.value !== cell) {
+                // If this does not have the same plant, it needs a fence
                 fences++;
             } else {
-                // Remove sides from matching neighborus
+                // Remove sides from matching neighbours
                 if (row > adjacent.row) {
                     cellFences.delete('N');
                 }
@@ -118,6 +123,7 @@ for (const [key, region] of Object.entries(regions)) {
             }
         }
 
+        // Keep track of actual fence pieces
         for (const fence of cellFences.values()) {
             regionFences.set(row + '.' + col + '.' + fence, {row: row, col: col, side: fence});
         }
@@ -126,6 +132,7 @@ for (const [key, region] of Object.entries(regions)) {
     const enumerated = new Set();
     let sides = 0;
 
+    // For each fence piece, build the entire side and keep count
     for (const [hash, fence] of regionFences.entries()) {
         if (enumerated.has(hash)) {
             continue;
@@ -154,8 +161,8 @@ for (const [key, region] of Object.entries(regions)) {
     p2 += sides * area;
 }
 
-
 console.log('P1: ', p1);
 console.log('P2: ', p2);
+
 const endTime = performance.now()
 console.log(`Execution time in msecs: ${endTime - startTime}`)
