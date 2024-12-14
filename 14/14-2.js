@@ -21,7 +21,6 @@ for (let i = 0; i < height; i++) {
 
 out:
     for (let sec = 0; sec <= 5000000; sec++) {
-        console.log(sec)
         const grid = new Grid();
         grid.setGrid(freshGrid);
 
@@ -41,7 +40,7 @@ out:
 
         if (grid.getPrinted().match(/(\*){10}/)) {
             grid.print(true)
-            console.log('!!!!!', sec);
+            console.log(sec);
             break out;
         }
     }
