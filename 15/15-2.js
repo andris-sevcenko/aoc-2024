@@ -3,7 +3,16 @@ import {getFile, Grid} from "../lib/utils.js";
 const [gridData, instructions] = getFile('input.txt').split("\n\n");
 
 const grid = new Grid();
-grid.setGrid(gridData.split("\n").map(r => r.replaceAll('#', '##').replaceAll('.', '..').replaceAll('O', '[]').replaceAll('@', '@.')).map(r => [...r]))
+
+// Expand the warehouse
+grid.setGrid(gridData.split("\n")
+    .map(r => { // Expand warehouse
+        return r.replaceAll('#', '##')
+            .replaceAll('.', '..')
+            .replaceAll('O', '[]')
+            .replaceAll('@', '@.')
+    })
+    .map(r => [...r])) // Split to array
 
 
 class Pusher {
@@ -32,7 +41,7 @@ class Pusher {
             let canPush = true;
             let newPushCols = new Set(pushCols.values());
 
-            // Check if we can push. If not, register any new cols we're pushing
+            // Check if we can push. If not, register any new cols we're pushing in the stack
             for (const pushCol of pushCols.values()) {
                 if (this.grid.getCell(row, pushCol) === '.') {
                     newPushCols.delete(pushCol)
@@ -56,7 +65,9 @@ class Pusher {
             }
 
             if (canPush) {
+                // We're clear to push
                 for (let swapRow = row; swapRow < this.row; swapRow++) {
+                    // Pop items from the stack, to keep track of which cols we're pushing in this step
                     pushCols = pushColStack.pop();
                     for (const pushCol of pushCols.values()) {
                         // Come back to pusher, swapping cells along the way.
@@ -86,7 +97,7 @@ class Pusher {
             let canPush = true;
             let newPushCols = new Set(pushCols.values());
 
-            // Check if we can push. If not, register any new cols we're pushing
+            // Check if we can push. If not, register any new cols we're pushing in the stack
             for (const pushCol of pushCols.values()) {
                 if (this.grid.getCell(row, pushCol) === '.') {
                     newPushCols.delete(pushCol)
@@ -110,7 +121,9 @@ class Pusher {
             }
 
             if (canPush) {
+                // We're clear to push
                 for (let swapRow = row; swapRow > this.row; swapRow--) {
+                    // Pop items from the stack, to keep track of which cols we're pushing in this step
                     pushCols = pushColStack.pop();
                     for (const pushCol of pushCols.values()) {
                         // Come back to pusher, swapping cells along the way.
