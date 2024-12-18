@@ -1,2 +1,5 @@
 .idea
 input.txt
+/node_modules
+/15/15-print.js
+/package-lock.json
