@@ -2,12 +2,7 @@ import {getAllLines, getFile} from "../lib/utils.js";
 
 const [towelData, patternData] = getFile('input.txt').split("\n\n");
 const patterns = patternData.split("\n").map((el) => el.trim());
-let maxTowelSize = 0;
-const towels = new Set(towelData.split(', ').map((el) => {
-    let trimmed = el.trim();
-    maxTowelSize = Math.max(maxTowelSize, trimmed.length);
-    return trimmed;
-}));
+const towels = new Set(towelData.split(', ').map((el) => el.trim()));
 
 const memoized = new Map()
 const howMany = (pattern) => {
