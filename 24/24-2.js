@@ -131,12 +131,4 @@ for (let i = 2; i < 45; i++) {
         console.log(orGate)
         continue;
     }
-    // if (gates.get(outputMap.get(outWire).values()[0])) {
-    //     throw new Error(outWire + ' has multiple writers');
-    // }
 }
-// loop through gates
-// for each entry in gate that has two actual values, set as registers
-// unless output is z, in which case store in z-regs
-
-// loop big
